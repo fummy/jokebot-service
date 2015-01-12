@@ -33,7 +33,7 @@ Building 80% > jettyRun > Running at http://localhost:8080/jokebot-service
 （！） お話を開始する前に、apikey を送信してください。
 
 
-# eclipse プロジェクトで開発するとき
+# eclipse で開発するとき
 
 ▼ gradle をインストールしている！
 
