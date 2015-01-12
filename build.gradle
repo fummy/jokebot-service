@@ -1,0 +1,30 @@
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'eclipse-wtp'
+
+repositories {
+  jcenter()
+  flatDir {
+    dirs 'libs'
+  }
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.5'
+  compile 'org.springframework:spring-context:4.1.4.RELEASE'
+  compile 'org.springframework:spring-webmvc:4.1.4.RELEASE'
+  compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
+  compile 'org.apache.httpcomponents:httpclient:4.3.6'
+  compile 'org.apache.httpcomponents:httpmime:4.3.6'
+  
+  compile ':docomo-common-java-sdk-1.0.3'
+  compile ':docomo-dialogue-java-sdk-1.1.0'
+  
+  testCompile 'junit:junit:4.11'
+    
+  providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'

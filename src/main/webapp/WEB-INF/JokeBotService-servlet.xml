@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+  xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	  http://www.springframework.org/schema/mvc
+	  http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:component-scan base-package="fummy.jokebot"/>
+  <mvc:annotation-driven />
+  
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	
+  <bean id="docomoApiConfig" class="fummy.jokebot.bot.DocomoApiConfig"
+    p:dialogueUrl="https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY={APIKEY}" />
+	
+  <bean id="akemi" class="fummy.jokebot.bot.JokeBot"
+    p:param.nickname="あけみ"
+    p:param.nickname_y="アケミ"
+    p:param.sex="女"
+    p:param.bloodtype="B"
+    p:param.birthdateY="1980"
+    p:param.birthdateM="5"
+    p:param.birthdateD="30"
+    p:param.age="34"
+  />
+  
+  <bean id="hosogai" class="fummy.jokebot.bot.JokeBot"
+    p:param.nickname="細貝"
+    p:param.nickname_y="ホソガイ"
+    p:param.sex="男"
+    p:param.bloodtype="O"
+    p:param.birthdateY="1958"
+    p:param.birthdateM="5"
+    p:param.birthdateD="30"
+    p:param.age="56"
+  />
+</beans>
