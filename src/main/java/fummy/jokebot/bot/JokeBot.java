@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import jp.ne.docomo.smt.dev.dialogue.param.DialogueRequestParam;
@@ -27,6 +25,7 @@ public class JokeBot {
     this.param = param;
   }
   
+  @SuppressWarnings("unchecked")
   public Reaction reaction(String keyword) {
     Reaction reaction = new Reaction();
 
