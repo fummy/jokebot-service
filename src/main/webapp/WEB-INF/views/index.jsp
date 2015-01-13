@@ -21,7 +21,7 @@
         answer.text('');
   
         $.ajax({
-          url : "/jokebot-service/reaction",
+          url : "reaction",
           type : 'POST',
           data : form.serializeArray()
         }).done(function(result) {
@@ -37,7 +37,7 @@
       $('button[name="store"]').on('click', function() {        
         var form = $(this).closest('form');
         $.ajax({
-          url : "/jokebot-service/store_apikey",
+          url : "store_apikey",
           type : 'POST',
           data : form.serializeArray()
         }).done(function(result) {
