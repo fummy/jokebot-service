@@ -21,6 +21,13 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	<bean id="httpComponentsClientHttpRequestFactory" class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory"/>
+  <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+    <constructor-arg ref="httpComponentsClientHttpRequestFactory"/>
+  </bean>
+  <!-- 
+   -->
+	
 	
   <bean id="docomoApiConfig" class="fummy.jokebot.bot.DocomoApiConfig"
     p:dialogueUrl="https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY={APIKEY}" />

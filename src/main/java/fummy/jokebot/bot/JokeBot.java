@@ -14,6 +14,9 @@ public class JokeBot {
   @Autowired
   protected DocomoApiConfig docomoApiConfig;
 
+  @Autowired
+  protected RestTemplate restTemplate;
+
   protected DialogueRequestParam param;
   
 
@@ -34,8 +37,8 @@ public class JokeBot {
     Map<String, String> vars = new HashMap<String, String>();
     vars.put("APIKEY", this.docomoApiConfig.getApikey());
 
-    RestTemplate restTemplate = new RestTemplate();
-    Map<String, String> result = restTemplate.postForObject(url, this.param, Map.class, vars);
+    //RestTemplate restTemplate = new RestTemplate();
+    Map<String, String> result = this.restTemplate.postForObject(url, this.param, Map.class, vars);
 
     reaction.setName(this.param.getNickname());
     reaction.setAnswer(result.get("utt"));

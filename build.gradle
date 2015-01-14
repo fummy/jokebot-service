@@ -2,6 +2,10 @@ apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'eclipse-wtp'
 
+configurations {
+  embeddedJetty
+}
+
 repositories {
   jcenter()
   flatDir {
@@ -21,16 +25,21 @@ dependencies {
   compile ':docomo-dialogue-java-sdk-1.1.0'
   
   testCompile 'junit:junit:4.11'
-    
+
   /*
   providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
   runtime 'com.github.jsimone:webapp-runner:7.0.57.1'
   */
+  providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
   
-  compile 'javax.servlet:javax.servlet-api:3.1.0'
+  embeddedJetty 'org.eclipse.jetty:jetty-runner:9.2.0.v20140526'
+  
+  /*
+  //compile 'javax.servlet:javax.servlet-api:3.1.0'
   providedCompile ('org.eclipse.jetty:jetty-runner:9.2.0.v20140526') {
       exclude module : 'javax.servlet-api'
   }
+  */
 }
 
 sourceCompatibility = '1.8'
@@ -39,7 +48,7 @@ targetCompatibility = '1.8'
 
 task copyJetty (type : Copy) {
   into "$buildDir/jetty"
-  from configurations.runtime
+  from configurations.embeddedJetty
 }
 
 task stage (dependsOn : ['clean', 'copyJetty'])
