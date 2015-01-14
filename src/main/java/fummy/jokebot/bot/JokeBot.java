@@ -121,8 +121,8 @@ public class JokeBot {
       //se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
       //httppost.setEntity(se);
 
-      //HttpResponse response = httpclient.execute(request);
-      HttpResponse response = httpclient2.execute(request);
+      HttpResponse response = httpclient.execute(request);
+      //HttpResponse response = httpclient2.execute(request);
       
       
       //HttpEntity entity = response.getEntity();
@@ -139,7 +139,7 @@ public class JokeBot {
       //reaction.setAnswer(response.toString() + ":OK");
       //reaction.setAnswer(response.getEntity().toString() + ":OK");
 
-      reaction.setAnswer(EntityUtils.toString(response.getEntity(), "UTF-8") + ":OK");
+      reaction.setAnswer(EntityUtils.toString(response.getEntity(), "UTF-8") + ":OK:" + keyword);
 
       
       
