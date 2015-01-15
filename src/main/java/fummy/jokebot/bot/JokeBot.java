@@ -108,8 +108,8 @@ public class JokeBot {
 
       //CloseableHttpResponse response = this.getNewHttpClientNG().execute(httpPost);
 
-      HttpClient httpclient = new DefaultHttpClient();
-      //HttpClient httpclient = getNewHttpClient();
+      //HttpClient httpclient = new DefaultHttpClient();
+      HttpClient httpclient = getNewHttpClient();
       HttpResponse response = httpclient.execute(request);
       
            
