@@ -34,7 +34,8 @@
     p:dialogueUrl2="https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY="/>
 	
   <bean id="akemi" class="fummy.jokebot.bot.JokeBot"
-    p:param.nickname="あけみ"
+    p:bot_id="1"
+    p:param.nickname="朱美"
     p:param.nickname_y="アケミ"
     p:param.sex="女"
     p:param.bloodtype="B"
@@ -45,6 +46,7 @@
   />
   
   <bean id="hosogai" class="fummy.jokebot.bot.JokeBot"
+    p:bot_id="2"
     p:param.nickname="細貝"
     p:param.nickname_y="ホソガイ"
     p:param.sex="男"
