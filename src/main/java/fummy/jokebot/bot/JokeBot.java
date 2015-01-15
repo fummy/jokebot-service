@@ -40,6 +40,7 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import jp.ne.docomo.smt.dev.dialogue.param.DialogueRequestParam;
@@ -73,12 +74,17 @@ public class JokeBot {
     Map<String, String> vars = new HashMap<String, String>();
     vars.put("APIKEY", this.docomoApiConfig.getApikey());
 
-    // RestTemplate restTemplate = new RestTemplate();
-    // Map<String, String> result = this.restTemplate.postForObject(url,
-    // this.param, Map.class, vars);
-    // reaction.setName(this.param.getNickname());
-    // reaction.setAnswer(result.get("utt"));
 
+    HttpClient httpclient = getNewHttpClient();
+    HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpclient);
+    RestTemplate restTemplate = new RestTemplate(requestFactory);
+    
+    // RestTemplate restTemplate = new RestTemplate();
+     Map<String, String> result = this.restTemplate.postForObject(url, this.param, Map.class, vars);
+     reaction.setName(this.param.getNickname());
+     reaction.setAnswer(result.get("utt"));
+
+    /*
     try {
 
       String url2 = this.docomoApiConfig.getDialogueUrl2() + this.docomoApiConfig.getApikey();
@@ -99,10 +105,12 @@ public class JokeBot {
       
       //httppost.setEntity(new UrlEncodedFormEntity(nvps));
       //JSONObject json = new JSONObject(); 
-      StringEntity params = new StringEntity("{\"utt\":\"" + keyword + "\"}");
-      request.addHeader("content-type", "application/json");
-      request.addHeader("Accept","application/json");
+      request.addHeader("content-type", "application/json; charset=UTF-8");
+      //request.addHeader("content-type", "application/x-www-form-urlencoded");
+      //request.addHeader("Accept","application/json");
       //se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+      //StringEntity params = new StringEntity("{\"utt\":\"" + keyword + "\"}");
+      StringEntity params = new StringEntity("{\"utt\":\"こんにちは\"}");
       request.setEntity(params);
 
 
@@ -110,6 +118,10 @@ public class JokeBot {
 
       //HttpClient httpclient = new DefaultHttpClient();
       HttpClient httpclient = getNewHttpClient();
+      
+      
+      
+      
       HttpResponse response = httpclient.execute(request);
       
            
@@ -129,6 +141,7 @@ public class JokeBot {
       reaction.setName(this.param.getNickname() + ":ERROR!!!");
       reaction.setAnswer(e.getLocalizedMessage());
     }
+    */
 
     return reaction;
   }
