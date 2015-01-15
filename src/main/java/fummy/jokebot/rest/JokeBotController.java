@@ -1,6 +1,8 @@
 package fummy.jokebot.rest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +46,33 @@ public class JokeBotController {
     result.put("status", "success");
     return result;
   }
+  
 
-  @RequestMapping(value = "/reaction", headers="Accept=application/json")
+  @RequestMapping(value = "/bot/list", headers="Accept=application/json")
+  @ResponseBody
+  public List<Map<String, String>> list() {
+    List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+    Map<String, String> bot = null;
+    
+    bot = new HashMap<String, String>();
+    bot.put("bot_id", "1");
+    bot.put("bot_name", "朱美");
+    bot.put("profile", "xxx");
+    bot.put("picture_url", "xxx");
+    list.add(bot);
+
+    bot = new HashMap<String, String>();
+    bot.put("bot_id", "2");
+    bot.put("bot_name", "細貝");
+    bot.put("profile", "xxx");
+    bot.put("picture_url", "xxx");
+    list.add(bot);
+    
+    return list;
+  }
+  
+
+  @RequestMapping(value = "/bot/reaction", headers="Accept=application/json")
   @ResponseBody
   public Reaction reaction(@RequestParam String keyword, @RequestParam("bot_id") int botId) { 
     if (botId == 1) {

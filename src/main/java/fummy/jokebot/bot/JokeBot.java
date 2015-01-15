@@ -56,6 +56,16 @@ public class JokeBot {
 
   protected DialogueRequestParam param;
   
+  protected int bot_id;
+  
+
+  public int getBot_id() {
+    return bot_id;
+  }
+
+  public void setBot_id(int bot_id) {
+    this.bot_id = bot_id;
+  }
 
   public DialogueRequestParam getParam() {
     return param;
@@ -83,6 +93,7 @@ public class JokeBot {
     //RestTemplate restTemplate = new RestTemplate();
      //Map<String, String> result = this.restTemplate.postForObject(url, this.param, Map.class, vars);
      Map<String, String> result = restTemplate.postForObject(url, this.param, Map.class, vars);
+     reaction.setId(this.bot_id);
      reaction.setName(this.param.getNickname());
      reaction.setAnswer(result.get("utt"));
     } catch (Exception e) {
