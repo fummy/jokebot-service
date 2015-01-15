@@ -64,7 +64,7 @@ public class JokeBot {
     this.param = param;
   }
   
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "deprecation", "resource" })
   public Reaction reaction(String keyword) {
     Reaction reaction = new Reaction();
 
@@ -79,34 +79,19 @@ public class JokeBot {
     // reaction.setName(this.param.getNickname());
     // reaction.setAnswer(result.get("utt"));
 
-    SSLContextBuilder builder = new SSLContextBuilder();
     try {
-      builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-      SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
-      CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-
-      // HttpGet httpGet = new HttpGet("https://some-server");
-      // CloseableHttpResponse response = httpclient.execute(httpGet);
 
       String url2 = this.docomoApiConfig.getDialogueUrl2() + this.docomoApiConfig.getApikey();
       HttpPost httpPost = new HttpPost(url2);
-      //httpPost.se
       httpPost.setHeader("Content-Type", "application/json;charset=UTF-8");
       
       List<NameValuePair> nvps = new ArrayList<NameValuePair>();
       nvps.add(new BasicNameValuePair("utt", "uhh."));
-      //nvps.add(new BasicNameValuePair("utt", keyword));
-      // nvps.add(new BasicNameValuePair("password", "secret"));
       httpPost.setEntity(new UrlEncodedFormEntity(nvps));
       
-      // dialogueUrl2
       
+      //HttpEntity entity = response.getEntity();
       
-      //CloseableHttpResponse response2 = httpclient.execute(httpPost);
-      //HttpEntity entity = response2.getEntity();
-      
-      //HttpClient httpclient2 = new DefaultHttpClient();
-      HttpClient httpclient2 = getNewHttpClient();
       
 
       
@@ -117,33 +102,29 @@ public class JokeBot {
       StringEntity params = new StringEntity("{\"utt\":\"" + keyword + "\"}");
       request.addHeader("content-type", "application/json");
       request.addHeader("Accept","application/json");
-      request.setEntity(params);
       //se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-      //httppost.setEntity(se);
+      request.setEntity(params);
 
+
+      //CloseableHttpResponse response = this.getNewHttpClientNG().execute(httpPost);
+
+      HttpClient httpclient = new DefaultHttpClient();
+      //HttpClient httpclient = getNewHttpClient();
       HttpResponse response = httpclient.execute(request);
-      //HttpResponse response = httpclient2.execute(request);
+      
+           
       
       
-      //HttpEntity entity = response.getEntity();
-      
-      
-      
-      
-      
-      //is = entity.getContent();
-      //entity.
-      //entity.
       
       reaction.setName(this.param.getNickname());
+      
       //reaction.setAnswer(response.toString() + ":OK");
       //reaction.setAnswer(response.getEntity().toString() + ":OK");
-
       reaction.setAnswer(EntityUtils.toString(response.getEntity(), "UTF-8") + ":OK:" + keyword);
 
       
       
-    } catch (IOException | NoSuchAlgorithmException | KeyStoreException | KeyManagementException e) {
+    } catch (IOException e) {
       e.printStackTrace();
       reaction.setName(this.param.getNickname() + ":ERROR!!!");
       reaction.setAnswer(e.getLocalizedMessage());
@@ -152,6 +133,35 @@ public class JokeBot {
     return reaction;
   }
   
+  
+  /**
+   * 
+   * 証明書のチェックなしに https にアクセスできない
+   * この方法ではうまくいかない
+   * 
+   * @return
+   */
+  @SuppressWarnings("unused")
+  private CloseableHttpClient getNewHttpClientNG() {
+    try {
+      SSLContextBuilder builder = new SSLContextBuilder();
+      builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+      SSLConnectionSocketFactory sslsf;
+      sslsf = new SSLConnectionSocketFactory(builder.build());
+      CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+      return httpclient;
+    } catch (NoSuchAlgorithmException | KeyStoreException |KeyManagementException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+  
+  
+  /**
+   * 証明書のチェックなしに https にアクセスできる
+   * @return
+   */
+  @SuppressWarnings("deprecation")
   private HttpClient getNewHttpClient() {
     try {
       KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -170,6 +180,7 @@ public class JokeBot {
       ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
       return new DefaultHttpClient(ccm, params);
     } catch (Exception e) {
+      e.printStackTrace();
       return new DefaultHttpClient();
     }
   }
