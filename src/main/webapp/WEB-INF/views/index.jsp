@@ -21,7 +21,7 @@
         answer.text('');
   
         $.ajax({
-          url : "reaction",
+          url : "bot/reaction",
           type : 'POST',
           data : form.serializeArray()
         }).done(function(result) {
@@ -69,7 +69,7 @@
   <div class="panel-body">
   <form class="form-inline">
     <div class="form-group">
-      <p class="form-control-static">あけみちゃんに</p>
+      <p class="form-control-static">朱美ちゃんに</p>
     </div>
     <div class="form-group">
       <input type="hidden" name="bot_id" value="1">
