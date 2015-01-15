@@ -75,14 +75,21 @@ public class JokeBot {
     vars.put("APIKEY", this.docomoApiConfig.getApikey());
 
 
+    try {
     HttpClient httpclient = getNewHttpClient();
     HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpclient);
     RestTemplate restTemplate = new RestTemplate(requestFactory);
     
-    // RestTemplate restTemplate = new RestTemplate();
-     Map<String, String> result = this.restTemplate.postForObject(url, this.param, Map.class, vars);
+    //RestTemplate restTemplate = new RestTemplate();
+     //Map<String, String> result = this.restTemplate.postForObject(url, this.param, Map.class, vars);
+     Map<String, String> result = restTemplate.postForObject(url, this.param, Map.class, vars);
      reaction.setName(this.param.getNickname());
      reaction.setAnswer(result.get("utt"));
+    } catch (Exception e) {
+      e.printStackTrace();
+      reaction.setName(this.param.getNickname() + ":ERROR!!!");
+      reaction.setAnswer(e.getLocalizedMessage());
+    }
 
     /*
     try {
