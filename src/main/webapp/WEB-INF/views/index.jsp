@@ -25,7 +25,7 @@
           type : 'POST',
           data : form.serializeArray()
         }).done(function(result) {
-          answer.text(result.name + ':' + result.answer);
+          answer.text(result.bot_name + ':' + result.answer);
         }).fail(function() {
           alert('error');
         }).always(function() {
