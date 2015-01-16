@@ -88,9 +88,9 @@ public class JokeBot {
     try {
     HttpClient httpclient = getNewHttpClient();
     HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpclient);
-    RestTemplate restTemplate = new RestTemplate(requestFactory);
+    //RestTemplate restTemplate = new RestTemplate(requestFactory);
     
-    //RestTemplate restTemplate = new RestTemplate();
+    RestTemplate restTemplate = new RestTemplate();
      //Map<String, String> result = this.restTemplate.postForObject(url, this.param, Map.class, vars);
      Map<String, String> result = restTemplate.postForObject(url, this.param, Map.class, vars);
      reaction.setId(this.bot_id);
