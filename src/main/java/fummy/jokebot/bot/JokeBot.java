@@ -168,7 +168,8 @@ public class JokeBot {
       
     KeyStore keyStore = KeyStore.getInstance("PKCS12");
     char[] keyPass = "changeit".toCharArray();
-    keyStore.load(new FileInputStream("/app/.jdk/jre/lib/security/cacerts"), keyPass);
+    //keyStore.load(new FileInputStream("/app/.jdk/jre/lib/security/cacerts"), keyPass);
+    keyStore.load(new FileInputStream("/app/keystore"), keyPass);
 
     SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, keyPass).build();
 
