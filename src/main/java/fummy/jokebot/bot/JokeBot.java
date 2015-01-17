@@ -81,9 +81,9 @@ public class JokeBot {
 
 
     try {
-      //HttpClient httpclient = getNewHttpClient();
+      HttpClient httpclient = getNewHttpClient();
       //HttpClient httpclient = getNewHttpClient2();
-      HttpClient httpclient = createHttpClientFactoryV43();
+      //HttpClient httpclient = createHttpClientFactoryV43();
       
       //HttpClient httpclient = new DefaultHttpClient();
       HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpclient);
