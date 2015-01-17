@@ -1,49 +1,44 @@
 package fummy.jokebot.bot;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.FileInputStream;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
+import javax.net.ssl.SSLContext;
+
+import jp.ne.docomo.smt.dev.dialogue.param.DialogueRequestParam;
+
 import org.apache.http.HttpVersion;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.config.ConnectionConfig;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContextBuilder;
+import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
-
-import jp.ne.docomo.smt.dev.dialogue.param.DialogueRequestParam;
 
 
 public class JokeBot {
@@ -86,16 +81,18 @@ public class JokeBot {
 
 
     try {
-    HttpClient httpclient = getNewHttpClient();
-    HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpclient);
-    //RestTemplate restTemplate = new RestTemplate(requestFactory);
-    
-    RestTemplate restTemplate = new RestTemplate();
-     //Map<String, String> result = this.restTemplate.postForObject(url, this.param, Map.class, vars);
-     Map<String, String> result = restTemplate.postForObject(url, this.param, Map.class, vars);
-     reaction.setId(this.bot_id);
-     reaction.setName(this.param.getNickname());
-     reaction.setAnswer(result.get("utt"));
+      //HttpClient httpclient = getNewHttpClient();
+      HttpClient httpclient = getNewHttpClient2();
+      //HttpClient httpclient = new DefaultHttpClient();
+      HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpclient);
+      RestTemplate restTemplate = new RestTemplate(requestFactory);
+      
+      //RestTemplate restTemplate = new RestTemplate();
+       //Map<String, String> result = this.restTemplate.postForObject(url, this.param, Map.class, vars);
+       Map<String, String> result = restTemplate.postForObject(url, this.param, Map.class, vars);
+       reaction.setId(this.bot_id);
+       reaction.setName(this.param.getNickname());
+       reaction.setAnswer(result.get("utt"));
     } catch (Exception e) {
       e.printStackTrace();
       reaction.setName(this.param.getNickname() + ":ERROR!!!");
@@ -164,29 +161,34 @@ public class JokeBot {
     return reaction;
   }
   
-  
-  /**
-   * 
-   * 証明書のチェックなしに https にアクセスできない
-   * この方法ではうまくいかない
-   * 
-   * @return
-   */
-  @SuppressWarnings("unused")
-  private CloseableHttpClient getNewHttpClientNG() {
+  private HttpClient getNewHttpClient2() {
+    // クライアント側の証明書の処理
+
     try {
-      SSLContextBuilder builder = new SSLContextBuilder();
-      builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-      SSLConnectionSocketFactory sslsf;
-      sslsf = new SSLConnectionSocketFactory(builder.build());
-      CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-      return httpclient;
-    } catch (NoSuchAlgorithmException | KeyStoreException |KeyManagementException e) {
-      e.printStackTrace();
+      
+    KeyStore keyStore = KeyStore.getInstance("PKCS12");
+    char[] keyPass = "changeit".toCharArray();
+    keyStore.load(new FileInputStream("/app/.jdk/jre/lib/security/cacerts"), keyPass);
+
+    SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, keyPass).build();
+
+    ConnectionConfig connectionConfig = ConnectionConfig.DEFAULT;
+    Registry<ConnectionSocketFactory> socketFactoryRegistry 
+      = RegistryBuilder.<ConnectionSocketFactory>create().register("http", PlainConnectionSocketFactory.INSTANCE)
+      .register("https", new SSLConnectionSocketFactory(sslcontext)).build();
+
+    BasicHttpClientConnectionManager connManager = new BasicHttpClientConnectionManager(socketFactoryRegistry);
+    connManager.setConnectionConfig(connectionConfig);
+
+    CloseableHttpClient httpclient = HttpClients.custom().setConnectionManager(connManager).build();
+    //return new DefaultHttpClient();
+    return httpclient;
+    } catch(Exception exp) {
       return null;
     }
+
   }
-  
+
   
   /**
    * 証明書のチェックなしに https にアクセスできる
@@ -217,6 +219,28 @@ public class JokeBot {
   }
   
 
+  /**
+   * 
+   * 証明書のチェックなしに https にアクセスできない
+   * この方法ではうまくいかない
+   * 
+   * @return
+   */
+  @SuppressWarnings("unused")
+  private CloseableHttpClient getNewHttpClientNG() {
+    try {
+      SSLContextBuilder builder = new SSLContextBuilder();
+      builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+      SSLConnectionSocketFactory sslsf;
+      sslsf = new SSLConnectionSocketFactory(builder.build());
+      CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+      return httpclient;
+    } catch (NoSuchAlgorithmException | KeyStoreException |KeyManagementException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+  
 
   public JokeBot() {
     this.param = new DialogueRequestParam();
