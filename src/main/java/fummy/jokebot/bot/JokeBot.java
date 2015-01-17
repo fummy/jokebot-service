@@ -184,6 +184,7 @@ public class JokeBot {
     //return new DefaultHttpClient();
     return httpclient;
     } catch(Exception exp) {
+      exp.printStackTrace();
       return null;
     }
 
