@@ -161,6 +161,12 @@ public class JokeBot {
     return reaction;
   }
   
+  private HttpClient createHttpClientFactoryV43() {
+    HttpClientFactoryV43 factory = new HttpClientFactoryV43();
+    return factory.insecureClient();
+  }
+  
+  
   private HttpClient getNewHttpClient2() {
     // クライアント側の証明書の処理
 
