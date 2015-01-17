@@ -54,7 +54,7 @@
 <body>
 <div class="container">
 <div class="jumbotron">
-  <h1>Joke Bot Debug Form v2</h1>
+  <h1>Joke Bot Debug Form</h1>
   <form>
     <div class="form-group">
       <div class="col-sm-10">
