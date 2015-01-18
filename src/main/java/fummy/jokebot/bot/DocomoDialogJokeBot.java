@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({"param"})
-public class JokeBotImpl implements JokeBot {
+public class DocomoDialogJokeBot implements JokeBot {
 
   @Autowired
   protected DocomoApiConfig docomoApiConfig;
@@ -84,7 +84,7 @@ public class JokeBotImpl implements JokeBot {
     return reaction;
   }
 
-  public JokeBotImpl() {
+  public DocomoDialogJokeBot() {
     this.param = new DialogueRequestParam();
   }
 }

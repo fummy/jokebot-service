@@ -46,18 +46,16 @@ public class JokeBotController {
     return jokeBots;
   }
   
-
   @RequestMapping(value = "/bot/list", headers="Accept=application/json")
   @ResponseBody
   public List<JokeBot> list() {
     List<JokeBot> jokeBots = new ArrayList<JokeBot>();
     jokeBots.add(this.akemi);
     jokeBots.add(this.hosogai);
-    
+
     return jokeBots;
   }
   
-
   @RequestMapping(value = "/bot/reaction", headers="Accept=application/json")
   @ResponseBody
   public Reaction reaction(@RequestParam String keyword, @RequestParam("bot_id") int botId) { 
