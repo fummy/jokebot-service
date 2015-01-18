@@ -31,8 +31,10 @@
     p:apikey="#{systemEnvironment['DOCOMO_APIKEY']}"
   />
 	
-  <bean id="akemi" class="fummy.jokebot.bot.JokeBot"
-    p:bot_id="1"
+  <bean id="akemi" class="fummy.jokebot.bot.JokeBotImpl"
+    p:id="1"
+    p:profile="雑談対話API 女性 B型 34歳"
+    p:pictureUrl="http://stat.ameba.jp/user_images/20140923/20/muse-baba/0b/60/j/t02200193_0300026313076027133.jpg"
     p:param.nickname="朱美"
     p:param.nickname_y="アケミ"
     p:param.sex="女"
@@ -43,8 +45,10 @@
     p:param.age="34"
   />
   
-  <bean id="hosogai" class="fummy.jokebot.bot.JokeBot"
-    p:bot_id="2"
+  <bean id="hosogai" class="fummy.jokebot.bot.JokeBotImpl"
+    p:id="2"
+    p:profile="雑談対話API 男性 O型 56歳"
+    p:pictureUrl="http://stat.ameba.jp/user_images/20140924/21/muse-baba/ac/05/j/t01430130_0143013013077200212.jpg"
     p:param.nickname="細貝"
     p:param.nickname_y="ホソガイ"
     p:param.sex="男"

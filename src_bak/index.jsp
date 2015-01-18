@@ -33,6 +33,21 @@
         });
         return false;
       });
+  
+      $('button[name="store"]').on('click', function() {        
+        var form = $(this).closest('form');
+        $.ajax({
+          url : "store_apikey",
+          type : 'POST',
+          data : form.serializeArray()
+        }).done(function(result) {
+          $('#apikey').val('');
+        }).fail(function() {
+          alert('error');
+        }).always(function() {
+        });
+        return false;
+      });
     });
   </script>
 </head>
@@ -40,6 +55,14 @@
 <div class="container">
 <div class="jumbotron">
   <h1>Joke Bot Debug Form</h1>
+  <form>
+    <div class="form-group">
+      <div class="col-sm-10">
+        <input id="apikey" type="text" name="apikey" class="form-control" placeholder="docomo apikey を送信してください">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" name="store">送信</button>
+  </form>
 </div>
 
 <div class="panel panel-default">

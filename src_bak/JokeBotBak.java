@@ -3,6 +3,10 @@ import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.net.ssl.SSLContext;
 
@@ -31,6 +35,9 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import fummy.jokebot.bot.HttpClientFactoryV43;
@@ -39,6 +46,38 @@ import fummy.jokebot.bot.Reaction;
 
 public class JokeBotBak {
   
+  @RequestMapping(value = "/store_apikey", headers="Accept=application/json")
+  @ResponseBody
+  public Map<String, String> storeApiKey(@RequestParam String apikey) {
+    this.docomoApiConfig.setApikey(apikey);
+    
+    Map<String, String> result = new HashMap<String, String>();
+    result.put("status", "success");
+    return result;
+  }
+  
+  @RequestMapping(value = "/bot/list", headers="Accept=application/json")
+  @ResponseBody
+  public List<Map<String, String>> list() {
+    List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+    Map<String, String> bot = null;
+    
+    bot = new HashMap<String, String>();
+    bot.put("bot_id", "1");
+    bot.put("bot_name", "朱美");
+    bot.put("profile", "xxx");
+    bot.put("picture_url", "xxx");
+    list.add(bot);
+
+    bot = new HashMap<String, String>();
+    bot.put("bot_id", "2");
+    bot.put("bot_name", "細貝");
+    bot.put("profile", "xxx");
+    bot.put("picture_url", "xxx");
+    list.add(bot);
+    
+    return list;
+  }
 
   public Reaction reaction(String keyword) {
 

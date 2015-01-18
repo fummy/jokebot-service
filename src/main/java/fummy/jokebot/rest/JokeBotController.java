@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
 import fummy.jokebot.bot.DocomoApiConfig;
 import fummy.jokebot.bot.JokeBot;
@@ -37,38 +36,25 @@ public class JokeBotController {
     return "index";
   }
 
-  @RequestMapping(value = "/store_apikey", headers="Accept=application/json")
+  @RequestMapping(value = "/debug", headers="Accept=application/json")
   @ResponseBody
-  public Map<String, String> storeApiKey(@RequestParam String apikey) {
-    this.docomoApiConfig.setApikey(apikey);
+  public List<JokeBot> debug() {    
+    List<JokeBot> jokeBots = new ArrayList<JokeBot>();
+    jokeBots.add(this.akemi);
+    jokeBots.add(this.hosogai);
     
-    Map<String, String> result = new HashMap<String, String>();
-    result.put("status", "success");
-    return result;
+    return jokeBots;
   }
   
 
   @RequestMapping(value = "/bot/list", headers="Accept=application/json")
   @ResponseBody
-  public List<Map<String, String>> list() {
-    List<Map<String, String>> list = new ArrayList<Map<String,String>>();
-    Map<String, String> bot = null;
+  public List<JokeBot> list() {
+    List<JokeBot> jokeBots = new ArrayList<JokeBot>();
+    jokeBots.add(this.akemi);
+    jokeBots.add(this.hosogai);
     
-    bot = new HashMap<String, String>();
-    bot.put("bot_id", "1");
-    bot.put("bot_name", "朱美");
-    bot.put("profile", "xxx");
-    bot.put("picture_url", "xxx");
-    list.add(bot);
-
-    bot = new HashMap<String, String>();
-    bot.put("bot_id", "2");
-    bot.put("bot_name", "細貝");
-    bot.put("profile", "xxx");
-    bot.put("picture_url", "xxx");
-    list.add(bot);
-    
-    return list;
+    return jokeBots;
   }
   
 
