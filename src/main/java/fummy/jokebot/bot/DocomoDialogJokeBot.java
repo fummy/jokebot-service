@@ -80,6 +80,7 @@ public class DocomoDialogJokeBot implements JokeBot {
     reaction.setId(this.id);
     reaction.setName(this.param.getNickname());
     reaction.setAnswer(result.get("utt"));
+    reaction.setPictureUrl(this.getPictureUrl());
 
     return reaction;
   }

@@ -17,7 +17,8 @@
         var btn = $(this).button('loading');
         
         var form = $(this).closest('form');
-        var answer = $('#answer_' + form.find('[name="bot_id"]').val());
+        var bod_id = form.find('[name="bot_id"]').val();
+        var answer = $('#answer_' + bod_id);
         answer.text('');
   
         $.ajax({
@@ -26,6 +27,7 @@
           data : form.serializeArray()
         }).done(function(result) {
           answer.text(result.bot_name + ':' + result.answer);
+          $('#picture_' + bod_id).prop('src', result.picture_url);
         }).fail(function() {
           alert('error');
         }).always(function() {
@@ -46,6 +48,7 @@
   <div class="panel-body">
   <form class="form-inline">
     <div class="form-group">
+      <img id="picture_1" class="form-control-static"/>
       <p class="form-control-static">朱美ちゃんに</p>
     </div>
     <div class="form-group">
@@ -60,6 +63,7 @@
   </form>
   <form class="form-inline">
     <div class="form-group">
+      <img id="picture_2" class="form-control-static"/>
       <p class="form-control-static">細貝さんに</p>
     </div>
     <div class="form-group">
