@@ -28,7 +28,6 @@
 	
   <bean id="docomoApiConfig" class="fummy.jokebot.bot.DocomoApiConfig"
     p:dialogueUrl="https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY={APIKEY}"
-    p:dialogueUrl2="https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY="
     p:apikey="#{systemEnvironment['DOCOMO_APIKEY']}"
   />
 	

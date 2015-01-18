@@ -6,17 +6,6 @@ public class DocomoApiConfig {
   
   private String dialogueUrl;
   
-
-  private String dialogueUrl2;
-
-  public String getDialogueUrl2() {
-    return dialogueUrl2;
-  }
-
-  public void setDialogueUrl2(String dialogueUrl2) {
-    this.dialogueUrl2 = dialogueUrl2;
-  }
-
   public String getDialogueUrl() {
     return dialogueUrl;
   }
