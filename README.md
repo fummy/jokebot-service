@@ -16,11 +16,20 @@
 
 cd /d ${jokebot-service-master}
 
+set DOCOMO_APIKEY=XXX
+
 gradle clean jettyRun
 
 ▼ gradle をインストールしていない・・・
 
+```
 cd /d ${jokebot-service-master}
+set DOCOMO_APIKEY=XXX
+gradlew clean jettyRun
+```
+cd /d ${jokebot-service-master}
+
+set DOCOMO_APIKEY=XXX
 
 gradlew clean jettyRun
 
