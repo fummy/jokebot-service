@@ -40,7 +40,7 @@ public class JokeBotTest {
   protected RestTemplate restTemplate;
 
   @SuppressWarnings("unchecked")
-  @Test
+  //@Test
   public void testService() {
     System.out.printf("%s %n", "weee ");
     Reaction reaction = siri.reaction("スイカ食べたいな");
@@ -48,6 +48,7 @@ public class JokeBotTest {
   }
   
   @SuppressWarnings("unchecked")
+  //@Test
   public void testService2() {
     
 
