@@ -19,24 +19,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration()
-@ContextConfiguration({"file:src/main/webapp/WEB-INF/JokeBotService-servlet.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@WebAppConfiguration()
+//@ContextConfiguration({"file:src/main/webapp/WEB-INF/JokeBotService-servlet.xml"})
 public class JokeBotTest {
 
 
-  @Autowired
+  //@Autowired
   protected DocomoApiConfig docomoApiConfig;
 
-  @Autowired
+  //@Autowired
   @Qualifier("siri")
   protected JokeBot siri;
 
-  @Autowired
-  @Qualifier("akemi")
+  //@Autowired
+  //@Qualifier("akemi")
   protected DocomoDialogJokeBot akemi;
   
-  @Autowired
+  //@Autowired
   protected RestTemplate restTemplate;
 
   @SuppressWarnings("unchecked")
