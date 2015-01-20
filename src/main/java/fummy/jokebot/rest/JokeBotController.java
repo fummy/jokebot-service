@@ -27,7 +27,10 @@ public class JokeBotController {
   @Autowired
   @Qualifier("hosogai")
   protected JokeBot hosogai;
-  
+
+  @Autowired
+  @Qualifier("siri")
+  protected JokeBot siri;
   
   @RequestMapping("/")
   public String index() {
@@ -40,6 +43,7 @@ public class JokeBotController {
     List<JokeBot> jokeBots = new ArrayList<JokeBot>();
     jokeBots.add(this.akemi);
     jokeBots.add(this.hosogai);
+    jokeBots.add(this.siri);
     
     return jokeBots;
   }
@@ -57,10 +61,12 @@ public class JokeBotController {
   @RequestMapping(value = "/bot/reaction", headers="Accept=application/json")
   @ResponseBody
   public Reaction reaction(@RequestParam String keyword, @RequestParam("bot_id") int botId) { 
-    if (botId == 1) {
-      return this.akemi.reaction(keyword);
-    } else {
+    if (botId == 3) {
+      return this.siri.reaction(keyword);
+    } else if(botId == 2)  {
       return this.hosogai.reaction(keyword);
+    } else {
+      return this.akemi.reaction(keyword);
     }
   }
 }

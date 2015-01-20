@@ -58,4 +58,18 @@
     p:param.birthdateD="30"
     p:param.age="56"
   />
+  
+  <bean id="siri" class="fummy.jokebot.bot.DocomoDialogSrtrJokeBot"
+    p:id="3"
+    p:profile="雑談対話API しりとりモード 女性 B型 15歳"
+    p:pictureUrl="http://www.upsold.com/image/cache/cache_wedesign_300474_400x400.png"
+    p:param.nickname="しりとりっ娘"
+    p:param.nickname_y="シリトリッコ"
+    p:param.sex="女"
+    p:param.bloodtype="O"
+    p:param.birthdateY="2000"
+    p:param.birthdateM="1"
+    p:param.birthdateD="1"
+    p:param.age="15"
+  />
 </beans>

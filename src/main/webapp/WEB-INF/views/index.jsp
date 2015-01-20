@@ -76,6 +76,21 @@
     <button type="submit" class="btn btn-primary btn-sm" name="go">話しかける</button>
     <span id="answer_2"></span>
   </form>
+  <form class="form-inline">
+    <div class="form-group">
+      <img id="picture_3" class="form-control-static"/>
+      <p class="form-control-static">しりとりっ娘に</p>
+    </div>
+    <div class="form-group">
+      <input type="hidden" name="bot_id" value="3">
+      <input type="text" name="keyword" value="スイカ食べたいな" class="form-control input-sm">
+    </div>
+    <div class="form-group">
+      <p class="form-control-static">と</p>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm" name="go">話しかける</button>
+    <span id="answer_3"></span>
+  </form>
    </div>
 </div>
 
