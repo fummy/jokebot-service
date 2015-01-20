@@ -54,6 +54,7 @@ public class JokeBotController {
     List<JokeBot> jokeBots = new ArrayList<JokeBot>();
     jokeBots.add(this.akemi);
     jokeBots.add(this.hosogai);
+    jokeBots.add(this.siri);
 
     return jokeBots;
   }
