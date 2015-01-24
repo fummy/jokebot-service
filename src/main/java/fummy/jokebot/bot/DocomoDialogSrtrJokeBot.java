@@ -6,71 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jp.ne.docomo.smt.dev.dialogue.param.DialogueRequestParam;
-
 import org.atilika.kuromoji.Token;
 import org.atilika.kuromoji.Tokenizer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties({"param"})
-public class DocomoDialogSrtrJokeBot implements JokeBot {
-
-  @Autowired
-  protected DocomoApiConfig docomoApiConfig;
-
-  @Autowired
-  protected RestTemplate restTemplate;
-  
-  protected DialogueRequestParam param;
-
-  protected int id;
-  
-  protected String profile;
-
-  protected String pictureUrl;
-
-  @Override
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  @Override
-  public String getName() {
-    return param.getNickname();
-  }
-
-  @Override
-  public String getProfile() {
-    return profile;
-  }
-
-  public void setProfile(String profile) {
-    this.profile = profile;
-  }
-
-  @Override
-  public String getPictureUrl() {
-    return pictureUrl;
-  }
-
-  public void setPictureUrl(String pictureUrl) {
-    this.pictureUrl = pictureUrl;
-  }
-
-  public DialogueRequestParam getParam() {
-    return param;
-  }
-
-  public void setParam(DialogueRequestParam param) {
-    this.param = param;
-  }
+@JsonIgnoreProperties({ "param" })
+public class DocomoDialogSrtrJokeBot extends DocomoDialogJokeBot {
 
   @SuppressWarnings({ "unchecked" })
   public Reaction reaction(String keyword) {
@@ -103,39 +45,19 @@ public class DocomoDialogSrtrJokeBot implements JokeBot {
     Map<String, String> vars = new HashMap<String, String>();
     vars.put("APIKEY", this.docomoApiConfig.getApikey());
 
-    Map<String, String> result = this.restTemplate.postForObject(url, param,
-        Map.class, vars);
-
-    // System.out.printf("%s %n", result);
+    Map<String, String> result = this.restTemplate.postForObject(url, param, Map.class, vars);
 
     String utt = result.get("utt");
-    //String yomi = result.get("yomi");
-
     if (utt.endsWith("私の勝ちです。")) {
-      System.out.printf("%s・・・%s", word, utt);
-      // reaction.setAnswer(String.format("%s・・・%s%n", word, utt));
+      reaction.setAnswer(String.format("%s・・・%s", word, utt));
     } else {
-      // int index = result.get("yomi").length() - 1;
-      // System.out.printf("%s・・・%s！%n", word, utt);
       reaction.setAnswer(String.format("%s・・・%s！", word, utt));
     }
 
-    // String url = this.docomoApiConfig.getDialogueUrl();
-    // this.param.setUtt(keyword);
-    // Map<String, String> vars = new HashMap<String, String>();
-    // vars.put("APIKEY", this.docomoApiConfig.getApikey());
-
-    // Map<String, String> result = this.restTemplate.postForObject(url,
-    // this.param, Map.class, vars);
     reaction.setId(this.id);
     reaction.setName(this.param.getNickname());
-    // reaction.setAnswer(result.get("utt"));
     reaction.setPictureUrl(this.getPictureUrl());
 
     return reaction;
-  }
-
-  public DocomoDialogSrtrJokeBot() {
-    this.param = new DialogueRequestParam();
   }
 }

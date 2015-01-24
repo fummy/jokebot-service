@@ -20,6 +20,7 @@ dependencies {
   compile 'com.fasterxml.jackson.core:jackson-databind:2.5.0'
   compile 'org.apache.httpcomponents:httpclient:4.3.6'
   compile 'org.apache.httpcomponents:httpmime:4.3.6'
+  compile 'com.memetix:microsoft-translator-java-api:0.6.2'
   
   compile ':docomo-common-java-sdk-1.0.3'
   compile ':docomo-dialogue-java-sdk-1.1.0'

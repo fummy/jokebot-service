@@ -72,4 +72,16 @@
     p:param.birthdateD="1"
     p:param.age="15"
   />
+  
+  <bean id="botlibre" class="fummy.jokebot.bot.BotlibreJokeBot"
+    p:id="4"
+    p:name="A.L.I.C.E"
+    p:profile="botlibre A.L.I.C.E http://www.botlibre.com/browse?id=132686"
+    p:pictureUrl="http://www.botlibre.com/avatars/a132887.jpg"
+    p:botlibreUrl="http://www.botlibre.com/rest/botlibre/form-chat?"
+    p:botlibreApplicationId="#{systemEnvironment['BOTLIBRE_APPLICATION_ID']}"
+    p:botlibreInstanceId="132686"
+    p:microsoftTranslatorApiClientId="#{systemEnvironment['MICROSOFT_TRANSLATOR_API_CLIENT_ID']}"
+    p:microsoftTranslatorApiClientSecret="#{systemEnvironment['MICROSOFT_TRANSLATOR_API_CLIENT_SECRET']}"
+  />
 </beans>

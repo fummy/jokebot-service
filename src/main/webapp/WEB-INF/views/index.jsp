@@ -46,52 +46,70 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-  <form class="form-inline">
-    <div class="form-group">
-      <img id="picture_1" class="form-control-static"/>
-      <p class="form-control-static">朱美ちゃんに</p>
-    </div>
-    <div class="form-group">
-      <input type="hidden" name="bot_id" value="1">
-      <input type="text" name="keyword" value="スイカ食べたいな" class="form-control input-sm">
-    </div>
-    <div class="form-group">
-      <p class="form-control-static">と</p>
-    </div>
-    <button type="submit" class="btn btn-primary btn-sm" name="go" data-loading-text="Loading...">話しかける</button>
-    <span id="answer_1"></span>
-  </form>
-  <form class="form-inline">
-    <div class="form-group">
-      <img id="picture_2" class="form-control-static"/>
-      <p class="form-control-static">細貝さんに</p>
-    </div>
-    <div class="form-group">
-      <input type="hidden" name="bot_id" value="2">
-      <input type="text" name="keyword" value="スイカ食べたいな" class="form-control input-sm">
-    </div>
-    <div class="form-group">
-      <p class="form-control-static">と</p>
-    </div>
-    <button type="submit" class="btn btn-primary btn-sm" name="go">話しかける</button>
-    <span id="answer_2"></span>
-  </form>
-  <form class="form-inline">
-    <div class="form-group">
-      <img id="picture_3" class="form-control-static"/>
-      <p class="form-control-static">しりとりっ娘に</p>
-    </div>
-    <div class="form-group">
-      <input type="hidden" name="bot_id" value="3">
-      <input type="text" name="keyword" value="スイカ食べたいな" class="form-control input-sm">
-    </div>
-    <div class="form-group">
-      <p class="form-control-static">と</p>
-    </div>
-    <button type="submit" class="btn btn-primary btn-sm" name="go">話しかける</button>
-    <span id="answer_3"></span>
-  </form>
-   </div>
+    <form class="form-inline">
+      <div class="form-group">
+        <img id="picture_1" class="form-control-static"/>
+        <p class="form-control-static">朱美ちゃんに</p>
+      </div>
+      <div class="form-group">
+        <input type="hidden" name="bot_id" value="1">
+        <input type="text" name="keyword" value="スイカ食べたいな" class="form-control input-sm">
+      </div>
+      <div class="form-group">
+        <p class="form-control-static">と</p>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm" name="go" data-loading-text="Loading...">話しかける</button>
+      <span id="answer_1"></span>
+    </form>
+    
+    <form class="form-inline">
+      <div class="form-group">
+        <img id="picture_2" class="form-control-static"/>
+        <p class="form-control-static">細貝さんに</p>
+      </div>
+      <div class="form-group">
+        <input type="hidden" name="bot_id" value="2">
+        <input type="text" name="keyword" value="スイカ食べたいな" class="form-control input-sm">
+      </div>
+      <div class="form-group">
+        <p class="form-control-static">と</p>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm" name="go">話しかける</button>
+      <span id="answer_2"></span>
+    </form>
+    
+    <form class="form-inline">
+      <div class="form-group">
+        <img id="picture_3" class="form-control-static"/>
+        <p class="form-control-static">しりとりっ娘に</p>
+      </div>
+      <div class="form-group">
+        <input type="hidden" name="bot_id" value="3">
+        <input type="text" name="keyword" value="スイカ食べたいな" class="form-control input-sm">
+      </div>
+      <div class="form-group">
+        <p class="form-control-static">と</p>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm" name="go">話しかける</button>
+      <span id="answer_3"></span>
+    </form>
+    
+    <form class="form-inline">
+      <div class="form-group">
+        <img id="picture_4" class="form-control-static"/>
+        <p class="form-control-static">A.L.I.C.E</p>
+      </div>
+      <div class="form-group">
+        <input type="hidden" name="bot_id" value="4">
+        <input type="text" name="keyword" value="スイカ食べたいな" class="form-control input-sm">
+      </div>
+      <div class="form-group">
+        <p class="form-control-static">と</p>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm" name="go">話しかける</button>
+      <span id="answer_4"></span>
+    </form>
+  </div>
 </div>
 
 </div>
