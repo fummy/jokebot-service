@@ -31,13 +31,13 @@ public class DocomoDialogSrtrJokeBot extends DocomoDialogJokeBot {
       }
     }
 
-    if (words.size() == 0) {
-      return reaction;
+    String url = this.docomoApiConfig.getDialogueUrl();
+    String word = "";
+    
+    if (words.size() > 0) {
+      word = words.get(words.size() - 1);
     }
 
-    String url = this.docomoApiConfig.getDialogueUrl();
-
-    String word = words.get(words.size() - 1);
     this.param.setUtt(word);
     this.param.setMode("srtr");
     this.param.setCharacter(30);
