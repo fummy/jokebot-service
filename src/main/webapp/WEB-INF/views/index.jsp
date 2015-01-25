@@ -48,7 +48,7 @@
   <div class="panel-body">
     <form class="form-inline">
       <div class="form-group">
-        <img id="picture_1" class="form-control-static"/>
+        <img id="picture_1" class="form-control-static" style="width:100px; height:100px;"/>
         <p class="form-control-static">朱美ちゃんに</p>
       </div>
       <div class="form-group">
@@ -64,7 +64,7 @@
     
     <form class="form-inline">
       <div class="form-group">
-        <img id="picture_2" class="form-control-static"/>
+        <img id="picture_2" class="form-control-static" style="width:100px; height:100px;"/>
         <p class="form-control-static">細貝さんに</p>
       </div>
       <div class="form-group">
@@ -80,7 +80,7 @@
     
     <form class="form-inline">
       <div class="form-group">
-        <img id="picture_3" class="form-control-static"/>
+        <img id="picture_3" class="form-control-static" style="width:100px; height:100px;"/>
         <p class="form-control-static">しりとりっ娘に</p>
       </div>
       <div class="form-group">
@@ -96,7 +96,7 @@
     
     <form class="form-inline">
       <div class="form-group">
-        <img id="picture_4" class="form-control-static"/>
+        <img id="picture_4" class="form-control-static" style="width:100px; height:100px;"/>
         <p class="form-control-static">A.L.I.C.E</p>
       </div>
       <div class="form-group">
