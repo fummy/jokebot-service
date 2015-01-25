@@ -3,7 +3,6 @@ package fummy.jokebot.bot;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
@@ -21,6 +20,9 @@ public class BotlibreJokeBot extends AbstractJokeBot {
 
   public Reaction reaction(String keyword) {
     Reaction reaction = new Reaction();
+    reaction.setId(this.id);
+    reaction.setName(this.getName());
+    reaction.setAnswer("");
 
     try {
       // Microsoft Translator API ja to en
@@ -38,11 +40,9 @@ public class BotlibreJokeBot extends AbstractJokeBot {
 
       // Microsoft Translator API en to ja
       translatedText = Translate.execute(result.getMessage(), Language.ENGLISH, Language.JAPANESE);
-
-      reaction.setId(this.id);
-      reaction.setName(this.getName());
       reaction.setAnswer(translatedText);
-      reaction.setPictureUrl(this.getPictureUrl());
+      //reaction.setPictureUrl(this.getPictureUrl());
+      reaction.setPictureUrl("http://www.botlibre.com/" + result.getAvatar());
     } catch (Exception e) {
       e.printStackTrace();
     }

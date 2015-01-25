@@ -55,7 +55,7 @@ public class JokeBotController {
 
   @RequestMapping(value = "/debug", headers="Accept=application/json")
   @ResponseBody
-  public List<JokeBot> debug() {    
+  public List<JokeBot> debug() {
     List<JokeBot> jokeBots = new ArrayList<JokeBot>();
     jokeBots.add(this.akemi);
     jokeBots.add(this.hosogai);
@@ -77,7 +77,7 @@ public class JokeBotController {
         imageFile = "siri.png";
         imageType = "png";
       }
-      InputStream inputStream = servletContext.getResourceAsStream("/WEB-INF/views/img/" + imageFile);      
+      InputStream inputStream = this.servletContext.getResourceAsStream("/WEB-INF/views/img/" + imageFile);      
       BufferedImage bufferedImage = ImageIO.read(inputStream);
 
       ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
